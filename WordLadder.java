@@ -54,6 +54,6 @@ class Solution {
           result++;  
         }
         
-        return result;
+        return 0;
     }
 }
