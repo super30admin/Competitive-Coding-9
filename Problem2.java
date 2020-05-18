@@ -1,5 +1,5 @@
-// Time Complexity : O(n)
-// Space Complexity : O(n) - more speciifically o(2n+1)
+// Time Complexity : O(max(days))
+// Space Complexity : O(max(days))
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : no
 
