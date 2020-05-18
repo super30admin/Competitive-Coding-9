@@ -1,0 +1,48 @@
+Time complexity: O(m^2 * n) m-> length of word, n-> no. of words
+Space complexity: O(m^2 * n) m-> length of word, n-> no. of words
+Did this code successfully submitted on leetcode: Yes
+
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        
+        Set<String> wordSet = new HashSet<>(wordList);
+        
+        //base condition
+        if(!wordSet.contains(endWord))
+            return 0;
+        
+        //BFS
+        Queue<String> q = new LinkedList<>();
+        q.offer(beginWord);
+        int res = 0;
+        int size = 0;
+        
+        while(!q.isEmpty()){
+           size = q.size(); 
+           for(int i = 0; i<size; i++){
+               String word = q.poll();
+               
+               if(word.equals(endWord))
+                   return res+1;
+               
+               for(int j=0; j<word.length();j++){
+                   char[] newWord = word.toCharArray();
+                   
+                   for(char ch='a'; ch<='z'; ch++){
+                       newWord[j]=ch;
+                       String s = new String(newWord);
+                       
+                       if(wordSet.contains(s)){
+                           q.offer(s);
+                           wordSet.remove(s);
+                       }
+                           
+                   }
+               }
+           }
+            res++;
+        }
+        return 0;
+    }
+}
+

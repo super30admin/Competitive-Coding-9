@@ -1,0 +1,33 @@
+Time complexity: O(n)
+Space complexity: O(max number given in the days)
+Did this code successfully submitted on leetcode: Yes
+
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        
+        if(days==null || days.length==0)
+            return 0;
+        
+        int max = Integer.MIN_VALUE;
+        Set<Integer> set = new HashSet<>();
+        
+        for(int day: days){
+            max = Math.max(max, day);
+            set.add(day);
+        }
+        
+        int[] dp = new int[max+1];
+        
+        for(int i=1; i<=max; i++){
+            if(!set.contains(i)){
+                dp[i]=dp[i-1];
+            }
+            else{
+                dp[i]= Math.min(dp[i-1]+ costs[0],
+                               Math.min(dp[Math.max(0,i-7)]+costs[1],
+                                       dp[Math.max(0,i-30)]+costs[2]));
+            }
+        }
+        return dp[max];
+    }
+}
