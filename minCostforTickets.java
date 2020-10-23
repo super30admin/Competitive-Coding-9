@@ -1,3 +1,6 @@
+// TC: O(N) + O(max(N))where N is length of days array and dp length of maximum value in days array
+// SC: O(N) + O(max(N)) for Set and the dp
+
 import java.util.HashSet;
 
 public class minCostforTickets {
