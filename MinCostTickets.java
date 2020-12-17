@@ -59,29 +59,27 @@ class Solution {
 //recursion
 
 // class Solution {
-//     int[] memo;
 //     public int mincostTickets(int[] days, int[] costs) {
-//         memo = new int[days.length + 1];
 //         return helper(days, costs, 0);
 //     }
 //     private int helper(int[] days, int[] cost, int index){
 //         if(index >= days.length){return 0;}
-        
+            
 //         //logic
 //         //1 day logic
-//         int oneDay = memo[index] == 0 ? helper(days, cost, index + 1) + cost[0] : memo[index] + cost[0];
+//         int oneDay = helper(days, cost, index + 1) + cost[0];
 //         int i;
 //         for(i = index; i < days.length; i++){
 //             if(days[i] >= days[index] + 7)
 //                 break;
 //         }
-//         int sevenDay = memo[i] == 0 ? helper(days, cost, i) + cost[1] : memo[i] + cost[1];
+//         int sevenDay = helper(days, cost, i) + cost[1];
 //         int j;
 //         for(j = index; j < days.length; j++){
 //             if(days[j] >= days[index] + 30)
 //                 break;
 //         }
-//         int thirtyDay = memo[j] == 0 ? helper(days, cost, j) + cost[2] : memo[j] + cost[2];
+//         int thirtyDay = helper(days, cost, j) + cost[2];
         
         
 //         return Math.min(oneDay, Math.min(sevenDay, thirtyDay));
