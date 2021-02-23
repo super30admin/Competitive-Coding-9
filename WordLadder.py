@@ -4,6 +4,10 @@ class Solution:
         if(not endWord in wl):
             return 0
         # DFS backtracking- TLE
+        # The reason for TLE is DFS finds all the paths and we find minimum among it. Thus causing TLE.
+        # To find the shortest path, BFS or level order traversal seems a good approach
+        
+        # Time Complexity: Exponential
         @cache
         def diff(w1,w2):
             flag = False
