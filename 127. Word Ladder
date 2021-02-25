@@ -1,0 +1,46 @@
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        # base
+        if(endWord not in wordList):
+            print('word not present in given input')
+            return 0;
+
+        graph = defaultdict(set);
+        # develop a graph
+        for word in wordList:
+            for i in range(len(word)):
+                possword = word[:i] + '*' + word[i+1:];
+                graph[possword].add(word);
+        #print(graph.items())
+
+
+        visited = set();
+        #apply bfs to find the shortest path
+
+        queue  = deque();
+        queue.append((beginWord,1));
+
+        while(queue):
+            word, level = queue.popleft();
+            #print(word, level)
+            if(word == endWord):
+                return level;
+            for i in range(len(word)):
+                possword = word[:i] + '*' + word[i+1:];
+
+                # visit neighbors of possword
+
+                for neighbor in graph[possword]:
+                    if(neighbor not in visited):
+                        queue.append((neighbor, level + 1));
+                        visited.add(neighbor);
+                graph[possword] = set();
+        return 0;
+    
+    '''
+    n = number of words
+    m = length of the word
+    time complexity = O(m2*n)
+    space complexity = O(m2*n)
+    '''
+        
