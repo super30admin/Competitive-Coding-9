@@ -21,22 +21,20 @@ class Solution:
         
         from collections import deque
         queue = deque(); wordSet = set()
-        queue.append(beginWord)
+        queue.append((beginWord, 1))
         wordSet.add(beginWord)
         level = 0; flag = False
         
         while queue:
-            prev_len = len(queue)
-            w = queue.popleft()
+            w, level = queue.popleft()
             for word in wordList:        
                 if word == endWord: 
                     flag = True
                     break
                 if self.ifDifferent(w, word) and word not in wordSet:
-                        queue.append(word)
-                        wordSet.add(word)
-            level += 1
-        
+                    queue.append((word, level + 1))
+                    wordSet.add(word)
+
         return level if flag else 0
         
     def ifDifferent(self, word1, word2):
