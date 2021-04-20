@@ -21,28 +21,28 @@ class Solution {
                 map.get(str).add(word);
             }
         }
-        int count=0;
-        Queue<String> que = new LinkedList();
+        Queue<Pair<String,Integer>> que = new LinkedList();
         List<String> list = new ArrayList<>();
-        que.add(beginWord);
+        que.add(new Pair<>(beginWord,1));
         while(!que.isEmpty()){
-            String str = que.poll();
+            Pair<String,Integer> pair = que.poll();
+            String str = pair.getKey();
+            int level = pair.getValue();
             for(int i=0;i<str.length();i++){
                 String s = str.substring(0,i)+"*"+str.substring(i+1,str.length());
                 if(map.containsKey(s)){
                     List<String> temp = map.get(s);
                     for(String st : temp){
                         if(st.equals(endWord)){
-                            return count+1;
+                            return level+1;
                         }
                         if(!list.contains(st)){
                             list.add(st);
-                            que.add(st);
+                            que.add(new Pair<>(st,level+1));
                         }
                     }
                 }
             }
-            count++;
         }
         return 0;
     }
