@@ -1,6 +1,7 @@
 /*
-TC = O(n)
-SC = O(n)
+TC = O(N)
+SC = O(N).      
+//specific for 366 days time span
 where n is the size of the vector days.
 */
 class Solution {
@@ -20,5 +21,27 @@ public:
             }
         }
         return dp[365];
+    }
+};
+
+/*
+TC = O(n)
+SC = O(n).    
+where n is the maximum day of the vector days.
+*/
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        set<int>s(days.begin(),days.end());
+        int maxi = days[days.size()-1];
+        vector<int>dp(maxi+1,0);
+        for(int i=1;i<dp.size();i++)
+        {
+            if(s.find(i)==s.end())
+                dp[i]=dp[i-1];
+            else
+                dp[i]=min(costs[0]+dp[i-1],min(costs[1]+dp[max(0,i-7)],costs[2]+dp[max(0,i-30)]));
+        }
+        return dp[maxi];
     }
 };
