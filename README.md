@@ -3,5 +3,5 @@
 ## Problem 1
 Minimum Cost for Tickets
 
-## Prolem 2
+## Problem 2
 Word Ladder
