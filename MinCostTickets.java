@@ -3,6 +3,7 @@ import java.util.Set;
 
 public class MinCostTickets {
 
+    // Leetcode # 983
     // Dynamic programming approach
     // TC: O(n) n - last day in the days array
     // SC: O(n) since we are storing the elements into a dp array
@@ -18,7 +19,8 @@ public class MinCostTickets {
         for (int i = 1; i < dp.length; i++) {
             if (set.contains(i)) {
                 int c1 = dp[i - 1] + costs[0]; // minimal cost up to the previous day + cost of buying 1-day pass
-                int c7 = dp[Math.max(i - 7, 0)] + costs[1]; // Minimal cost up to the 7 days prior(if it exists else 0) + cost of buying 7 days pass
+                int c7 = dp[Math.max(i - 7, 0)] + costs[1]; // Minimal cost up to the 7 days prior(if it exists else 0) (because this pass expired just 1 day back)
+                                                                        // + cost of buying 7 days pass
                 int c30 = dp[Math.max(i - 30, 0)] + costs[2]; // Minimal cost up to the 30 days prior(if it exists else 0) + cost of buying 30 days pass
                 dp[i] = Math.min(c1, Math.min(c7, c30)); // get the minimum of all these possibilities
             } else {
