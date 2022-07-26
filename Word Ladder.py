@@ -33,3 +33,25 @@ class Solution:
 
             level += 1
         return 0
+# class Solution:
+#     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+#         q = deque()
+#         wordSet = set(wordList)
+#         q.append(beginWord)
+#         level = 1
+#         while q:
+#             size = len(q)
+#             for k in range(size):
+#                 curr = q.popleft()
+#                 for i in range(len(curr)):
+#                     for j in range(26):
+#                         char = chr(ord('a') + j)
+#                         new = curr[:i] + char + curr[i+1 : ]
+#                         if new in wordSet and curr[i] != char:
+#                             q.append(new)
+#                             wordSet.remove(new)
+#                             if new == endWord :
+#                                 return level + 1
+
+#             level += 1
+#         return 0
