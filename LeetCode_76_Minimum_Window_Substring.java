@@ -11,7 +11,8 @@ import java.util.Map;
 //after these to nested while loop , we will put a check - if fast is out of bound and match is still less than map size, it means none
 //of the while loop will be invoked, and so we break there!
 // we have put the last if check so we can cover the case wjen we dont find any character/combination in s!
-
+//sc- O(1) + hashmap which is constant 
+//tc - O(N)+O(N) = O(2n) + O(t) - build map
 class Solution {
     public String minWindow(String s, String t) {
         if(s == null || s.length() == 0 ||t == null || t.length() == 0||s.length()<t.length())
