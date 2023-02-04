@@ -1,0 +1,56 @@
+//TimeComplexity.  O(M^2 * N)
+//SpaceComplexity. O(M^2 * N)
+
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        
+
+        HashSet<String> set = new HashSet<>(wordList);
+        Queue<String> q = new LinkedList<>();
+        
+
+        
+        q.add(beginWord);
+        int level = 1;
+        if(!set.contains(endWord))return 0;
+        if(set.contains(beginWord))set.remove(beginWord);
+
+        while(!q.isEmpty()){
+            int size = q.size();
+
+            for(int i = 0; i < size; i++){
+                String curr = q.poll();
+                
+
+                if(curr.equals(endWord))return level;
+
+                for(int k = 0;  k < curr.length(); k++){
+   
+                    char[] temp = curr.toCharArray();
+                    
+
+                    for(char j = 'a'; j <= 'z'; j++){
+                       
+                        temp[k] = j;
+                        String curr1 = new String(temp);
+                        
+                        
+                        if(set.contains(curr1)){
+                            
+                            q.add(curr1);
+                            
+                            set.remove(curr1);
+                        }
+                    }
+                    
+                }
+            }
+            level++;
+        
+        }
+        
+    
+    return 0;
+
+    }
+}
