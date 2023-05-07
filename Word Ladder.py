@@ -17,5 +17,4 @@ class Solution:
                     if word in hset:
                         dq.append((word, level + 1))
                         hset.remove(word)
-
         return 0

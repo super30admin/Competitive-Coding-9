@@ -1,6 +1,7 @@
 days = [1,4,6,7,8,20,25]
 costs = [2,7,15]
-
+# Time O(N)
+# Space O(N)
 hset = set(days)
 dp = [0 for i in range(days[-1] + 1)]
 print(dp)
