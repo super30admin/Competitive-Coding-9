@@ -1,0 +1,39 @@
+//TimeComplexity.   O(n)
+//SpaceComplexity.  O(1). //at max 365 days. O(365)
+
+class Solution {
+    int[] dp;
+    public int mincostTickets(int[] days, int[] costs) {
+        int n = days.length;
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int num : days){
+            set.add(num);
+                    }
+        
+        int[] dp = new int[days[n-1]+1];
+
+        for(int i = 1; i < dp.length; i++){
+
+            int day1 = dp[i-1] + costs[0];
+            int day7 = costs[1];
+            int day30 = costs[2];
+
+            if(i-7 >= 0){
+                day7 = dp[i-7] + costs[1];
+            }
+
+            if(i-30 >= 0){
+                day30 = dp[i-30] + costs[2];
+            }
+            if(!set.contains(i)){
+                dp[i] = dp[i-1];
+            }else{
+                 dp[i] = Math.min(day1,Math.min(day7,day30));
+            }
+           
+           
+        }
+        return dp[dp.length-1];
+    }
+}
