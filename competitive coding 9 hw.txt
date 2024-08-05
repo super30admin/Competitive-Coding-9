@@ -1,0 +1,33 @@
+competitive coding 9
+(cc 6 1st problem)
+
+Interview Problem: Calculate Minimum Cost For Tickets
+
+Tc: O(max_days) 
+Sc: O(max_days)
+where max_day is the last day of travel
+
+class Solution:
+    def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+        if days == None or len(days )== 0:
+            return 0
+
+        lastday = days[-1]
+        dp = [0] * (lastday + 1)
+        i = 0
+        for day in range(1, lastday + 1):
+            # if we are not travelling on a particular day, we will take value of prev day
+            if day < days[i]:
+                dp[day] = dp[day - 1]
+            else:
+                # Buy a pass on this day, and move on to the next travel day.
+                i = i + 1
+                # Store the cost with the minimum of the three options.
+                dp[day] = min(dp[day - 1] + costs[0] ,
+                                dp[max(0, day - 7)] + costs[1] ,
+                                    dp[max(0 , day - 30)] + costs[2]
+                                    )
+    
+        return dp[lastday]                                                                                                                                      
+
+
