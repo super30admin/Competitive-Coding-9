@@ -1,0 +1,44 @@
+class Solution:
+    
+    def fun(self, idx, days, costs, passes, dp):
+        # travelled all days
+        if(idx == len(days)):
+            return 0;
+        
+        if(dp[idx] != -1):
+            return dp[idx]
+        
+        # initialize a cost value to store the maximum cost spent to
+        # reach the last day from the current idx day
+        maxval = float('inf');
+        
+        for i in range(len(passes)):
+            # store the end day and end index for the corresponding pass
+            endday = days[idx] + passes[i] - 1;
+            endidx = len(days);
+           
+            # function to find the idx of the next day to travel
+            for j in range(idx,len(days)):
+                if(days[j] > endday):
+                    endidx = j;
+                    break;
+            temp = costs[i] + self.fun(endidx, days, costs, passes, dp);
+            # update the max cost to travel from idx day
+            if(temp < maxval):
+                maxval = temp;
+        dp[idx] = maxval
+        return maxval;
+                
+    
+    
+    def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+        passes = [1,7, 30]
+        dp = [-1 for i in range(len(days))];
+        return self.fun(0, days, costs, passes, dp);
+    
+    '''
+    time complexity = O(n)
+    space complexity = O(n)
+    '''
+        
+        
