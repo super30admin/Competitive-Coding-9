@@ -1,0 +1,40 @@
+//TC,SC - TC -O(n) - n is number of days , SC - O(n) - using 1d dp array
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        
+        int[] dp = new int[days.length]; 
+        return helper(days, costs, 0, dp);
+    }
+    
+    private int helper(int[] days, int[] costs, int index, int[] dp){
+        
+        //base condition
+        if(index >= days.length){
+            return 0;
+        }
+        if(dp[index] > 0){
+            return dp[index];
+        }
+        
+        //logic
+        // three options [2,7,15]
+        
+        int option1 = costs[0] + helper(days, costs, index+1, dp);
+        //[1,4,6,7,11,20]
+        int i;
+        for(i = index ; i < days.length && days[i] < (days[index] + 7); i++) {
+            
+        }
+        int option2 = costs[1] + helper(days, costs, i, dp);
+        
+        for(i = index ; i < days.length && days[i] < (days[index] + 30); i++) {
+            
+        }
+        int option3 = costs[2] + helper(days, costs, i, dp);
+        
+        dp[index] =  Math.min(option1 , Math.min(option2,option3));
+        
+        return dp[index];
+        
+    }
+}
