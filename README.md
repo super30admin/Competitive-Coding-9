@@ -1,3 +1,5 @@
 # Competitive-Coding-9
 
-Please submit the interview problems posted in slack channel here. The problems and statements are intentionally not shown here so that students are not able to see them in advance 
+# [Word Ladder](https://leetcode.com/problems/word-ladder/description/)
+
+# [Minimum Cost of Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/description/)
