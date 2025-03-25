@@ -1,0 +1,31 @@
+// Time Complexity :O(n) //max day for days 
+// Space Complexity :O(n) //max day from days(do array)+O(m) for hashset
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:Dp 1d array approach
+
+
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        HashSet<Integer> daySet = new HashSet<>();
+        for(int day:days){
+            daySet.add(day);//puttings days into hashset for O(1) lookup
+        }
+        int max = days[days.length - 1];//max day from days 
+        int[] dp = new int[max + 1];
+        dp[0] = 0;//initializing 0 index as zero
+        for (int i = 1; i < dp.length; i++) {//O(n) max day from days arrays
+            if (!daySet.contains(i)) {//O(1)
+                dp[i] = dp[i - 1];//if set does not contains then just taking its previos values
+                continue;
+            }else{
+                dp[i]=Math.min(dp[i-1]+costs[0],
+                Math.min(dp[Math.max(0,i-7)]+costs[1],dp[Math.max(0,i-30)]+costs[2])
+                );//taking min between choosing 3 possible passes which we have
+            }
+        }
+        return dp[dp.length-1];//returning the min which we got finally at last index
+    }
+}

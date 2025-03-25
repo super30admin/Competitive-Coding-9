@@ -1,0 +1,52 @@
+// Time Complexity :O(N*L*26)->processsing n words of length l and for each char processing 26 operations
+// Space Complexity :O(N)for hashset+O(N) for queue and O(L) each word processing  
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        HashSet<String> mySet = new HashSet<>(wordList);// copied the wordList into hashset for O(1) lookup
+        Queue<String> queue = new LinkedList<>(); // to add the words which we found from wordList and maintaing the
+        // base case:end word should be in the wordList
+        if (!mySet.contains(endWord)) {// O(1)
+            return 0;
+        }
+        int level = 0;// initializing level as 0
+        queue.add(beginWord);
+        level++;// as we added begin word to queue
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String word = queue.poll();// polling from queue
+                System.out.println("word " + word);
+                for (int j = 0; j < word.length(); j++) {
+                    char[] chArray = word.toCharArray();// creating char array from polled string
+                    char ch = chArray[j];// taking char from j th index
+                    // here replacing each char from word array char by replacing one char at a time
+                    // from all lower case chars
+                    for (char k = 'a'; k <= 'z'; k++) {
+                        if (ch == k)// skipping if same char as new char
+                            continue;
+                        chArray[j] = k;// here first replaed our jth index char with ohther char and checking whether
+                                       // its exist in wordlist as hashset and also checking is is the end word or not
+                        String newword = new String(chArray);
+                         if (newword.equals(endWord)) {
+                           return level + 1;// if we found that as endword done
+                        }
+                        if (!mySet.contains(newword)) {
+                            continue;// if it does not exist in dictionary
+                        }
+                       mySet.remove(newword);// if it exist then removing from set(to mark as visited)
+                        queue.add(newword);// adding to queue
+                         }
+                    chArray[j] = ch;// and replacing back with original char
+                }
+            }
+            level++;
+        }
+        return 0;
+    }
+}
