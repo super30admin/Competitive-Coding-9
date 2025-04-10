@@ -1,0 +1,143 @@
+##Problem1
+
+class Solution {
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+
+        HashSet<String> set = new HashSet<>();
+
+        for(String word:wordList){
+
+            set.add(word);
+
+        }
+
+        if(!set.contains(endWord)){
+
+            return 0;
+
+        }
+
+        Queue<String> q = new LinkedList<>();
+
+        q.offer(beginWord);
+
+        int level=1;
+
+        while(!q.isEmpty()){
+
+            int size = q.size();
+
+            for(int i=0;i<size;i++){
+
+                String currWord = q.poll();
+
+                char[] charWord = currWord.toCharArray();
+
+                for(int j=0;j<charWord.length;j++){
+
+                    char temp = charWord[j];
+
+                    for( char c = 'a';c<'z';c++){
+
+                        if(charWord[j]==c) continue;
+
+                        charWord[j]=c;
+
+                        String newString = String.valueOf(charWord);
+
+                        if(newString.equals(endWord))return level+1;
+
+                        if(set.contains(newString)){
+
+                            q.offer(newString);
+
+                            set.remove(newString);
+
+                        }
+
+                    }
+
+                    charWord[j]=temp;
+
+                }
+
+            }
+
+            level++;
+
+        }
+
+        return 0;
+
+    }
+
+}
+
+
+##Problem2
+class Solution {
+
+    int[] costs;
+
+    Integer[] memo;
+
+    Set<Integer> dayset;
+
+
+
+    public int mincostTickets(int[] days, int[] costs) {
+
+        this.costs = costs;
+
+        memo = new Integer[366];
+
+        dayset = new HashSet();
+
+        for (int d: days) dayset.add(d);
+
+
+
+        return dp(1);
+
+    }
+
+
+
+    public int dp(int i) {
+
+        if (i > 365)
+
+            return 0;
+
+        if (memo[i] != null)
+
+            return memo[i];
+
+
+
+        int ans;
+
+        if (dayset.contains(i)) {
+
+            ans = Math.min(dp(i+1) + costs[0],
+
+                               dp(i+7) + costs[1]);
+
+            ans = Math.min(ans, dp(i+30) + costs[2]);
+
+        } else {
+
+            ans = dp(i+1);
+
+        }
+
+
+
+        memo[i] = ans;
+
+        return ans;
+
+    }
+
+}
