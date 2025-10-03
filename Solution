@@ -1,0 +1,34 @@
+// TC O(n3)
+
+// We calculate cost for each pass and recurse. 
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        if(days==null || days.length==0){
+            return 0;
+        }
+
+        return recurse(days, costs, 0);
+    }
+
+    private int recurse(int[] days, int[] costs, int index) {
+        if (index >= days.length) {
+            return 0;
+        }
+
+        int oneDayCost = costs[0] + recurse(days, costs, index + 1);
+
+        int j = index;
+        while (j < days.length && days[j] < days[index] + 7) {
+            j++;
+        }
+        int sevenDayCost = costs[1] + recurse(days, costs, j);
+
+        int k = index;
+        while (k < days.length && days[k] < days[index] + 30) {
+            k++;
+        }
+        int thirtyDayCost = costs[2] + recurse(days, costs, k);
+
+        return Math.min(oneDayCost, Math.min(sevenDayCost, thirtyDayCost));
+    }
+}
